@@ -1,0 +1,63 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --stroke-color: black;
+}
+
+[data-theme="light"] {
+  --color-bg: #f4f4f9;
+  --color-text: #0d1216;
+  --color-border: #ddd;
+  --color-subHeading: #4b5563; /*gray-600*/
+  --stroke-color: #0d1216;
+  --card-bg: #f4f4f9;
+  --button-bg: #1e1e1e;
+  --button-text: #faf6fe;
+  --button-hover: #333;
+  --input-bg: white;
+  --input-border: #19181822;
+  --input-focus-border: #dddddd1e;
+  --creator-bg: #e5e7eb; /*gray-100*/
+  --hr-border: #9ca3af;
+  --toggle-border: #9ca3af;
+  --toggle-bg: #e5e7eb;
+  --wallet-bg: white;
+}
+
+[data-theme="dark"] {
+  --color-bg: linear-gradient(290deg, rgba(27,1,47,1) 0%, rgba(8,12,19,1) 99%);
+  --color-text: #f4f4f9;
+  --color-border: #dddddd1e;
+  --color-subHeading: #d1d5db; /*gray-300*/
+  --stroke-color: #f4f4f9;
+  --card-bg: #111827; /*gray-900*/
+  --button-bg: #faf6fe;
+  --button-text: #333;
+  --button-hover: #ccc7d0;
+  --input-bg: #18181b;
+  --input-border: #18181b;
+  --input-focus-border: #dddddd1e;
+  --creator-bg: #202127;
+  --hr-border: #dddddd1e;
+  --toggle-border: #dddddd31;
+  --toggle-bg: #1f2937;
+  --wallet-bg: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --stroke-color: white;
+  }
+}

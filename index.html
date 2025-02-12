@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <link>
+    <meta charset="UTF-8" />
+    
+    <link rel="icon" type="image/svg+xml" href="./src/assets/logo-light.svg" />
+    <script>
+      function setFavicon() {
+        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const faviconLink = document.querySelector("link[rel='icon']");
+
+        faviconLink.href = isDarkMode ? "./src/assets/logo-dark.svg" : "./src/assets/logo-light.svg";
+      }
+      setFavicon();
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setFavicon);
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    />
+    <title>Web 3 Wallet</title>
+  </head>
+  <body class="min-w-80">
+    <div id="root" class="flex flex-col gap-4 transition-colors duration-200  text-center mx-auto my-0 h-full"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+<!-- linear-gradient(290deg, rgba(27,1,47,1) 0%, rgba(8,12,19,1) 99%)", -->
