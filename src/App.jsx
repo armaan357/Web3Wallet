@@ -12,7 +12,7 @@ import { BrowserRouter, Routes, Route, Link, useNavigate, Outlet } from 'react-r
 import { WalletImportPrivateKey } from './components/importWalletPrivateKey';
 import { ImportWalletPhrase } from './components/importWalletPhrase';
 import { ImportWalletPublicKey } from './components/importWalletPublicKey';
-import { SpeedInsights} from '@vercel/speed-insights'
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
     const [ wallet, setWallet ] = useState(null);
@@ -36,16 +36,8 @@ function App() {
 
     return (
         <div id='backGround' className={`w-full ${currentThemeSetting == 'dark' ? "bg-custom-gradient-dark" : "bg-[#faf5f9]" } transition-colors duration-200 text-[var(--color-text)] min-h-dvh h-full`}>
-            <SpeedInsights />
+            <Analytics />
             <div className='max-w-7xl mx-auto'>
-                {/* {tab === 'test' ? <div className='flex w-screen h-screen'>
-                    <div className='bg-red-300 transition-all duration-1000 basis-1/12 md:basis-1/4 '>
-                        SideBar
-                    </div>
-                    <div className='bg-green-400 transition-all duration-1000 basis-11/12 md:basis-3/4 w-full'>
-                        COntent
-                    </div>
-                </div> : null} */}
                 <NavBar currentThemeSetting={currentThemeSetting} setCurrentThemeSetting={setCurrentThemeSetting} />
                 <BrowserRouter>
                     <Routes>
