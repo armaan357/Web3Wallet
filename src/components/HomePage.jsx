@@ -14,9 +14,8 @@ const HomePage = ({ setTab, setWalletMethod }) => {
             <p className='text-lg md:text-2xl max-w-3xl mb-10 text-[var(--color-subHeading)]'>Secure, simple, and powerful. Manage your Solana and Ethereum assets with our easy-to-use wallet.</p>
             <div className='flex flex-col md:flex-row w-72 md:w-[400px] lg:w-[500px] justify-center gap-4 my-4'>
                 <Button
-                    bgColor={'bg-gradient-to-r from-indigo-400 to-purple-400'}
+                    bgColor={'bg-[var(--primary-button-bg)] hover:bg-[var(--primary-button-hover)]'}
                     textColor={'text-white'}
-                    hoverBgColor={'bg-gradient-to-r from-purple-900 to-purple-950'}
                     onClick={() => { setTab('BlockchainNetwork');  setWalletMethod('Create'); navigate('/networks');  }}>
                     Create New Wallet
                 </Button>
@@ -28,7 +27,7 @@ const HomePage = ({ setTab, setWalletMethod }) => {
                 </Button>
             </div>
                 <section id="features" className="container mx-auto px-4 py-20">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">Why Choose CryptoVault?</h2>
+                    <h2 className=" text-3xl md:text-5xl font-bold mb-12 text-center">Why Choose Web3 Wallet?</h2>
                     <div className="grid md:grid-cols-3 gap-8">
                         {[
                         {
@@ -47,8 +46,8 @@ const HomePage = ({ setTab, setWalletMethod }) => {
                             description: "Seamlessly manage assets across various blockchain networks from one interface.",
                         },
                         ].map((feature, index) => (
-                        <div key={index} className="bg-[var(--card-bg)] bg-opacity-50 p-6 rounded-xl backdrop-blur-sm">
-                            <feature.icon className="w-12 h-12 text-[#7c35b5] mb-4 mx-auto" />
+                        <div key={index} className="bg-[var(--card-bg)] bg-opacity-50 p-6 rounded-xl backdrop-blur-sm shadow-md">
+                            <feature.icon className="w-12 h-12 text-[#1127F1] mb-4 mx-auto" />
                             <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                             <p className="text-[var(--color-subHeading)]">{feature.description}</p>
                         </div>
@@ -77,13 +76,13 @@ const HomePage = ({ setTab, setWalletMethod }) => {
                         },
                         ].map((step, index) => (
                         <div key={index} className="relative">
-                            <div className="bg-[var(--card-bg)] bg-opacity-50 p-6 rounded-xl backdrop-blur-sm">
-                            <div className="text-5xl font-bold text-[#7c35b5] mb-4">{step.step}</div>
+                            <div className="bg-[var(--card-bg)] bg-opacity-50 p-6 rounded-xl backdrop-blur-sm shadow-md">
+                            <div className="text-5xl font-bold text-[#1127F1] mb-4">{step.step}</div>
                             <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
                             <p className="text-[var(--color-subHeading)]">{step.description}</p>
                             </div>
                             {index < 2 && (
-                            <ArrowRight className="hidden md:block absolute top-1/2 -right-6 text-[#7c35b5] w-8 h-8 transform -translate-y-1/2" />
+                            <ArrowRight className="hidden md:block absolute top-1/2 -right-6 text-[#1127F1] w-8 h-8 transform -translate-y-1/2" />
                             )}
                         </div>
                         ))}

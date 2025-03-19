@@ -86,7 +86,14 @@ const WalletDetails = ({ wallet, setTab }) => {
                     </div>
                     <p className='mb-5 text-xl'><strong>Balance:</strong> {balance} ETH</p>
                 </div>
-                <div className='w-5/6 sm:w-72 self-center'>
+                <div className='w-5/6 sm:w-72 self-center flex gap-5'>
+                    <Button
+                        bgColor={'bg-[var(--button-bg)]'}
+                        textColor={'text-[var(--button-text)]'}
+                        hoverBgColor={'bg-[var(--button-hover)]'}
+                        onClick={() => navigate('/purchase')} >
+                            Purchase
+                        </Button>
                     <Button
                         bgColor={'bg-[var(--button-bg)]'} 
                         textColor={'text-[var(--button-text)]'} 

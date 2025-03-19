@@ -12,7 +12,7 @@ import { BrowserRouter, Routes, Route, Link, useNavigate, Outlet } from 'react-r
 import { WalletImportPrivateKey } from './components/importWalletPrivateKey';
 import { ImportWalletPhrase } from './components/importWalletPhrase';
 import { ImportWalletPublicKey } from './components/importWalletPublicKey';
-import { Analytics } from "@vercel/analytics/react"
+import CryptoPurchase from './components/Purchase';
 
 function App() {
     const [ wallet, setWallet ] = useState(null);
@@ -35,8 +35,7 @@ function App() {
     const [currentThemeSetting, setCurrentThemeSetting] = useState(calculateSettingAsThemeString({ localStorageTheme, systemSettingDark }));
 
     return (
-        <div id='backGround' className={`w-full ${currentThemeSetting == 'dark' ? "bg-custom-gradient-dark" : "bg-[#faf5f9]" } transition-colors duration-200 text-[var(--color-text)] min-h-dvh h-full`}>
-            <Analytics />
+        <div id='backGround' className={`w-full ${currentThemeSetting == 'dark' ? "bg-custom-gradient-dark" : "bg-custom-gradient-light" } transition-colors duration-200 text-[var(--color-text)] min-h-dvh h-full`}>
             <div className='max-w-7xl mx-auto'>
                 <NavBar currentThemeSetting={currentThemeSetting} setCurrentThemeSetting={setCurrentThemeSetting} />
                 <BrowserRouter>
@@ -49,6 +48,7 @@ function App() {
                         <Route path='/import-wallet/public-key' element={<ImportWalletPublicKey />} /> 
                         <Route path='/create-wallet' element={<WalletCreator onWalletCreate={ setWallet } setTab={ setTab } />} />
                         <Route path='/wallet-details' element={<WalletDetails wallet={ wallet } setTab={ setTab } />} />
+                        <Route path='/purchase' element={<CryptoPurchase />} />
                         <Route path='/send' element={<Transaction wallet={ wallet } setTab={ setTab } />} />
                     </Routes>
                 </BrowserRouter>
