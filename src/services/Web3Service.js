@@ -1,4 +1,3 @@
-// src/services/Web3Service.js
 import { ethers } from 'ethers';
 
 class Web3Service {
@@ -12,7 +11,6 @@ class Web3Service {
         }
         
         try {
-            // This is the new way to create a provider in ethers.js v6
             this.provider = new ethers.JsonRpcProvider(providerUrl);
         } catch (error) {
             console.error('Error initializing provider:', error);
@@ -21,19 +19,17 @@ class Web3Service {
     }
 
     generateMnemonic() {
-        // In v6, we use Wallet.createRandom() directly
         const wallet = ethers.Wallet.createRandom();
         return wallet.mnemonic?.phrase;
     }
 
     createWalletFromMnemonic(mnemonic) {
-        // Updated for v6
         return ethers.HDNodeWallet.fromPhrase(mnemonic).connect(this.provider);
     }
 
     async getBalance(address) {
         const balance = await this.provider.getBalance(address);
-        return ethers.formatEther(balance); // Updated formatting method
+        return ethers.formatEther(balance); 
     }
 
     async sendTransaction(wallet, toAddress, amount) {
@@ -44,21 +40,17 @@ class Web3Service {
         try {
             const tx = {
                 to: toAddress,
-                value: ethers.parseEther(amount.toString()) // Updated parsing method
+                value: ethers.parseEther(amount.toString()) 
             };
 
-            // Get current gas price
             const feeData = await this.provider.getFeeData();
             tx.gasPrice = feeData.gasPrice;
 
-            // Estimate gas limit
             const gasLimit = await this.provider.estimateGas(tx);
             tx.gasLimit = gasLimit;
 
-            // Send transaction
             const transaction = await wallet.sendTransaction(tx);
             
-            // Wait for transaction to be mined
             const receipt = await transaction.wait();
             
             return receipt;
@@ -88,7 +80,7 @@ class Web3Service {
         const contract = new ethers.Contract(tokenAddress, minABI, this.provider);
         const decimals = await contract.decimals();
         const balance = await contract.balanceOf(walletAddress);
-        return ethers.formatUnits(balance, decimals); // Updated formatting method
+        return ethers.formatUnits(balance, decimals); 
     }
 }
 

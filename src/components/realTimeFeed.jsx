@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const CryptoPrices = (network) => {
   const [prices, setPrices] = useState({ ETH: null, SOL: null });

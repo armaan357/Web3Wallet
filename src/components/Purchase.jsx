@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
-import * as web3 from '@solana/web3.js';
+import { useState, useEffect } from 'react';
 import { InputBox } from './Input';
 import { Button } from './Buttons';
 
@@ -23,25 +21,22 @@ const CryptoPurchase = () => {
     accountName: '',
   });
 
-  // Mock exchange rates (in USD)
   const EXCHANGE_RATES = {
     ethereum: 3000,
     solana: 100,
   };
 
-  // Payment method options
   const PAYMENT_METHODS = {
     card: {
       name: 'Credit/Debit Card',
-      fees: 0.03, // 3%
+      fees: 0.03, 
     },
     bank: {
       name: 'Bank Transfer',
-      fees: 0.01, // 1%
+      fees: 0.01,
     },
   };
 
-  // Calculate crypto amount based on USD input
   useEffect(() => {
     if (purchaseAmount) {
       const amount = parseFloat(purchaseAmount);
@@ -78,27 +73,16 @@ const CryptoPurchase = () => {
     setLoading(true);
 
     try {
-      // Validate amount
       if (!purchaseAmount || parseFloat(purchaseAmount) <= 0) {
         throw new Error('Please enter a valid amount');
       }
 
-      // Validate payment details
       validatePaymentDetails();
 
-      // Here you would typically:
-      // 1. Connect to a payment processor
-      // 2. Process the payment
-      // 3. Execute the crypto purchase
-      // 4. Send the crypto to the user's wallet
-
-      // Simulating API call
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      // Success message
       alert(`Successfully purchased ${cryptoAmount} ${selectedCrypto.toUpperCase()}`);
 
-      // Reset form
       setPurchaseAmount('');
       setPaymentDetails({
         cardNumber: '',

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from './Buttons';
 import { useNavigate } from 'react-router-dom';
 
-const ImportMethods = ({ setTab }) => {
+const ImportMethods = () => {
 
     const navigate = useNavigate();
 

@@ -18,15 +18,13 @@ export const ImportWalletPhrase = () => {
   const [showDetails, setShowDetails] = useState(false);
 
   const validateRecoveryPhrase = (phrase) => {
-    // Remove extra whitespace and split
+
     const words = phrase.trim().split(/\s+/);
     
-    // Check word count
     if (![12, 15, 18, 21, 24].includes(words.length)) {
       return false;
     }
 
-    // Validate each word
     try {
       return bip39.validateMnemonic(words.join(' '));
     } catch {
@@ -35,32 +33,27 @@ export const ImportWalletPhrase = () => {
   };
 
   const importWallet = async () => {
-    // Reset previous state
+
     setError('');
     setImportedWallets({ ethereum: null, solana: null });
 
-    // Validate recovery phrase
     if (!validateRecoveryPhrase(recoveryPhrase)) {
       setError('Invalid recovery phrase. Please check and try again.');
       return;
     }
 
-    // Optional password validation
     if (passwordEnabled && !password) {
       setError('Please enter a password');
       return;
     }
 
     try {
-      // Derive Ethereum Wallet
-      const ethWallet = ethers.Wallet.fromPhrase(recoveryPhrase);
 
-      // Derive Solana Wallet
+      const ethWallet = ethers.Wallet.fromPhrase(recoveryPhrase);
       const seed = await bip39.mnemonicToSeed(recoveryPhrase);
       const derivedSeed = derivePath(`m/44'/501'/0'/0'`, seed.slice(0, 32));
       const solanaKeypair = web3.Keypair.fromSeed(derivedSeed.key);
 
-      // Set imported wallets
       setImportedWallets({
         ethereum: {
           address: ethWallet.address,
@@ -72,7 +65,6 @@ export const ImportWalletPhrase = () => {
         }
       });
 
-      // Optional: Add encrypted storage logic here if password is enabled
       setShowDetails(true);
     } catch (err) {
       setError(`Import failed: ${err.message}`);
@@ -113,7 +105,7 @@ export const ImportWalletPhrase = () => {
       <h2 className="text-2xl font-bold mb-4">Import Wallet</h2>
       
       <div className="mb-4">
-        {/* <label className="block mb-2 font-medium">Secret Recovery Phrase</label> */}
+
         <textarea
           rows="4"
           className="bg-[var(--input-bg)] w-full p-3 text-[var(--color-text)] text-base rounded-lg outline-none focus-within:shadow-md border border-[var(--input-border)] focus-within:border focus-within:border-[var(--input-focus-border)]"

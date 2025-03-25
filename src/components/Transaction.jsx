@@ -1,11 +1,11 @@
-import React from 'react'
+import  { useState } from 'react'
 import { Button } from './Buttons'
 import { InputBox } from './Input'
 
-export const Transaction = ({ wallet, setTab }) => {
-    const [recipient, setRecipient] = React.useState('');
-    const [amount, setAmount] = React.useState('');
-    const [status, setStatus] = React.useState('');
+export const Transaction = ({ wallet }) => {
+    const [recipient, setRecipient] = useState('');
+    const [amount, setAmount] = useState('');
+    const [status, setStatus] = useState('');
 
     const sendTransaction = async (e) => {
         e.preventDefault();

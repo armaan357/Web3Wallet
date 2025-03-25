@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import { Button } from './Buttons';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Zap, Coins } from "lucide-react"
 
-const HomePage = ({ setTab, setWalletMethod }) => {
+const HomePage = ({ setWalletMethod }) => {
 
     const navigate = useNavigate();
 
@@ -16,13 +15,13 @@ const HomePage = ({ setTab, setWalletMethod }) => {
                 <Button
                     bgColor={'bg-[var(--primary-button-bg)] hover:bg-[var(--primary-button-hover)]'}
                     textColor={'text-white'}
-                    onClick={() => { setTab('BlockchainNetwork');  setWalletMethod('Create'); navigate('/networks');  }}>
+                    onClick={() => { setWalletMethod('Create'); navigate('/networks');  }}>
                     Create New Wallet
                 </Button>
                 <Button 
                     bgColor={'bg-[var(--button-bg)]'} 
                     textColor={'text-[var(--button-text)]'} 
-                    hoverBgColor={'bg-[var(--button-hover)]'} onClick={() => { setTab('BlockchainNetwork'); setWalletMethod('Import'); navigate('/networks'); }}>
+                    hoverBgColor={'bg-[var(--button-hover)]'} onClick={() => { setWalletMethod('Import'); navigate('/networks'); }}>
                     Import Wallet
                 </Button>
             </div>
@@ -91,5 +90,5 @@ const HomePage = ({ setTab, setWalletMethod }) => {
         </div>
     );
 };
-// bg-gradient-to-br from-[#7b35b5da] to-[#5636f3]
+
 export default HomePage;

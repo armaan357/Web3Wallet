@@ -12,27 +12,24 @@ export const WalletImportPrivateKey = ({ onWalletCreate }) => {
 
   const importWallet = async () => {
     try {
-      // Clear any previous errors
+
       setError('');
       
-      // Validate private key format
+
       if (!privateKey.startsWith('0x')) {
         throw new Error('Private key must start with 0x');
       }
       
-      if (privateKey.length !== 66) {  // 0x + 64 hex characters
+      if (privateKey.length !== 66) {  
         throw new Error('Private key must be 64 characters long (excluding 0x prefix)');
       }
 
-      // Create wallet instance
+
       const wallet = new ethers.Wallet(privateKey);
       
-      // Get wallet address
       const address = await wallet.getAddress();
       setWalletAddress(address);
 
-      // Here you would typically:
-      // 1. Connect to your provider
       const URL = import.meta.env.VITE_PROVIDER_URL;
       const provider = new ethers.JsonRpcProvider(URL);
       const connectedWallet = wallet.connect(provider);
@@ -40,12 +37,6 @@ export const WalletImportPrivateKey = ({ onWalletCreate }) => {
       onWalletCreate(connectedWallet);
       navigate('/wallet-details');
       
-      // 2. Store wallet info securely (never store private key!)
-      // localStorage.setItem('walletAddress', address);
-      
-      // 3. Update your app's state
-      // dispatch({ type: 'SET_WALLET', payload: address });
-
     } catch (err) {
       setError(err.message);
       setWalletAddress('');

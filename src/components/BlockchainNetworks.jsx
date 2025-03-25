@@ -2,16 +2,14 @@ import React from 'react';
 import { Button } from './Buttons';
 import { useNavigate } from 'react-router-dom';
 
-const BlockchainNetworks = ({ setTab, walletMethod, setNetwork }) => {
+const BlockchainNetworks = ({ walletMethod, setNetwork }) => {
     const navigate = useNavigate();
     const redirect = (network) => {
         setNetwork(network);
         if(walletMethod === 'Create') {
             navigate('/create-wallet');
-            setTab('WalletCreator');
         } else {
             navigate('/import-wallet')
-            setTab('ImportMethod');
         }
     }
     return (

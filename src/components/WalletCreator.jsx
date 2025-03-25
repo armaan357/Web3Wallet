@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Web3Service from '../services/Web3Service';
 import "../App.css";
 import { Button } from './Buttons.jsx';
@@ -6,8 +6,7 @@ import TransitionsSnackbar from './BiscuitAlert.jsx';
 import Slide from '@mui/material/Slide';
 import { useNavigate } from 'react-router-dom';
 
-const WalletCreator = ({ onWalletCreate, setTab }) => {
-    const [mnemonic, setMnemonic] = useState('');
+const WalletCreator = ({ onWalletCreate, wallet, mnemonic, setMnemonic }) => {
     const [state, setState] = React.useState({
         open: false,
         Transition: Slide,
@@ -16,10 +15,10 @@ const WalletCreator = ({ onWalletCreate, setTab }) => {
     const web3Service = new Web3Service();
 
     useEffect(() => {
+        if(wallet) return;
         const generateNewWallet = () => {
             const newMnemonic = web3Service.generateMnemonic();
             setMnemonic(newMnemonic);
-            console.log("mnemonic: ",mnemonic);
             const wallet = web3Service.createWalletFromMnemonic(newMnemonic);
             onWalletCreate(wallet);
         }
@@ -71,7 +70,7 @@ const WalletCreator = ({ onWalletCreate, setTab }) => {
                 <Button
                     bgColor={'bg-[var(--button-bg)]'} 
                     textColor={'text-[var(--button-text)]'} 
-                    hoverBgColor={'bg-[var(--button-hover)]'} onClick={() =>{ setTab('WalletDetails'); navigate('/wallet-details') }}>
+                    hoverBgColor={'bg-[var(--button-hover)]'} onClick={() =>{ navigate('/wallet-details') }}>
                     Continue
                 </Button>
             </div>

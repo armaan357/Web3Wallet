@@ -11,7 +11,6 @@ export const ImportWalletPublicKey = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Blockchain configurations
   const CHAINS = {
     ethereum: {
       name: 'Ethereum',
@@ -50,22 +49,22 @@ export const ImportWalletPublicKey = () => {
   };
 
   const fetchWalletInfo = async () => {
-    // Reset previous state
+
     setWalletInfo(null);
     setError('');
     setLoading(true);
 
     try {
-      // Validate public key
+
       const currentChain = CHAINS[chain];
       if (!currentChain.validateAddress(publicKey)) {
         throw new Error('Invalid public key for selected blockchain');
       }
 
-      // Fetch balance
+
       const balance = await currentChain.fetchBalance(publicKey);
 
-      // Additional wallet info can be added here
+
       setWalletInfo({
         publicKey,
         chain: currentChain.name,
@@ -81,7 +80,7 @@ export const ImportWalletPublicKey = () => {
     }
   };
 
-  // Automatically fetch wallet info when public key changes
+
   useEffect(() => {
     if (publicKey) {
       fetchWalletInfo();

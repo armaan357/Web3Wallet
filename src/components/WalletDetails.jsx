@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Web3Service from '../services/Web3Service';
-import copyIcon from '../assets/copy.svg';
 import TransitionsSnackbar from './BiscuitAlert.jsx';
 import Slide from '@mui/material/Slide';
 import { Button } from './Buttons.jsx';
 import { useNavigate } from 'react-router-dom';
 import CryptoPrices from './realTimeFeed.jsx';
 
-
-
-const WalletDetails = ({ wallet, setTab, network }) => {
+const WalletDetails = ({ wallet, network }) => {
     const [balance, setBalance] = useState('0');
     const [state, setState] = React.useState({
         open: false,
@@ -95,7 +92,7 @@ const WalletDetails = ({ wallet, setTab, network }) => {
                     <Button
                         bgColor={'bg-[var(--button-bg)]'} 
                         textColor={'text-[var(--button-text)]'} 
-                        hoverBgColor={'bg-[var(--button-hover)]'} onClick={() =>{ setTab('Transaction'); navigate('/send') }} >
+                        hoverBgColor={'bg-[var(--button-hover)]'} onClick={() =>{ navigate('/send') }} >
                             Send
                     </Button>
                 </div>
