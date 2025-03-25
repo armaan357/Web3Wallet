@@ -36,7 +36,7 @@ export const WalletImportPrivateKey = ({ onWalletCreate }) => {
       const URL = import.meta.env.VITE_PROVIDER_URL;
       const provider = new ethers.JsonRpcProvider(URL);
       const connectedWallet = wallet.connect(provider);
-      console.log("connect wallet: ", connectedWallet);
+
       onWalletCreate(connectedWallet);
       navigate('/wallet-details');
       

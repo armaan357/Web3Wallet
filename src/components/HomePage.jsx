@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from './Buttons';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Zap, Coins } from "lucide-react"

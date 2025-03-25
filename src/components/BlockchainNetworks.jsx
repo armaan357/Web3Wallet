@@ -2,10 +2,10 @@ import React from 'react';
 import { Button } from './Buttons';
 import { useNavigate } from 'react-router-dom';
 
-const BlockchainNetworks = ({ setTab, walletMethod }) => {
+const BlockchainNetworks = ({ setTab, walletMethod, setNetwork }) => {
     const navigate = useNavigate();
-    const redirect = () => {
-
+    const redirect = (network) => {
+        setNetwork(network);
         if(walletMethod === 'Create') {
             navigate('/create-wallet');
             setTab('WalletCreator');
@@ -25,13 +25,13 @@ const BlockchainNetworks = ({ setTab, walletMethod }) => {
                 <Button 
                     bgColor={'bg-[var(--button-bg)]'} 
                     textColor={'text-[var(--button-text)]'} 
-                    hoverBgColor={'bg-[var(--button-hover)]'} onClick={redirect}>
+                    hoverBgColor={'bg-[var(--button-hover)]'} onClick={() => redirect("Sol")}>
                     Solana
                 </Button>
                 <Button 
                     bgColor={'bg-[var(--button-bg)]'} 
                     textColor={'text-[var(--button-text)]'} 
-                    hoverBgColor={'bg-[var(--button-hover)]'} onClick={redirect}>
+                    hoverBgColor={'bg-[var(--button-hover)]'} onClick={() => redirect("Eth")}>
                     Ethereum
                 </Button>
             </div>

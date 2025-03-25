@@ -5,20 +5,19 @@ import TransitionsSnackbar from './BiscuitAlert.jsx';
 import Slide from '@mui/material/Slide';
 import { Button } from './Buttons.jsx';
 import { useNavigate } from 'react-router-dom';
+import CryptoPrices from './realTimeFeed.jsx';
 
-const WalletDetails = ({ wallet, setTab }) => {
+
+
+const WalletDetails = ({ wallet, setTab, network }) => {
     const [balance, setBalance] = useState('0');
-    const [recipient, setRecipient] = useState('');
-    const [amount, setAmount] = useState('');
-    const [status, setStatus] = useState('');
     const [state, setState] = React.useState({
         open: false,
         Transition: Slide,
     });
     const navigate = useNavigate();
     const web3Service = new Web3Service();
-
-    console.log("details wallet = ", wallet);
+    const prices = CryptoPrices(network);
 
     function copyToClipboard(key) {
         navigator.clipboard.writeText(key)
@@ -40,22 +39,6 @@ const WalletDetails = ({ wallet, setTab }) => {
         if (wallet) {
             const newBalance = await web3Service.getBalance(wallet.address);
             setBalance(newBalance);
-        }
-    };
-
-    const changeTab = () => {
-        setTab('Transaction');
-    }
-
-    const sendTransaction = async (e) => {
-        e.preventDefault();
-        setStatus('Sending transaction...');
-        try {
-            const receipt = await web3Service.sendTransaction(wallet, recipient, amount);
-            setStatus(`Transaction successful! Hash: ${receipt.transactionHash}`);
-            updateBalance();
-        } catch (error) {
-            setStatus(`Error: ${error.message}`);
         }
     };
 
@@ -84,7 +67,22 @@ const WalletDetails = ({ wallet, setTab }) => {
                             </div>
                         </div>
                     </div>
-                    <p className='mb-5 text-xl'><strong>Balance:</strong> {balance} ETH</p>
+                    <p className='mb-5 text-xl'><strong>Balance:</strong> {balance} {network === 'Eth' ? 'ETH' : "SOL"}</p>
+                </div>
+                <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px' }}>
+                    <h1>Real-Time Crypto Prices</h1>
+                    {network === 'Eth' ? <div style={{ marginBottom: '20px' }}>
+                        <h2>Ethereum (ETH)</h2>
+                        <p style={{ fontSize: '1.5rem' }}>
+                        {prices.ETH ? `$${parseFloat(prices.ETH).toFixed(2)}` : 'Loading...'}
+                        </p>
+                    </div> :
+                    <div>
+                        <h2>Solana (SOL)</h2>
+                        <p style={{ fontSize: '1.5rem' }}>
+                        {prices.SOL ? `$${parseFloat(prices.SOL).toFixed(2)}` : 'Loading...'}
+                        </p>
+                    </div>}
                 </div>
                 <div className='w-5/6 sm:w-72 self-center flex gap-5'>
                     <Button
@@ -98,7 +96,7 @@ const WalletDetails = ({ wallet, setTab }) => {
                         bgColor={'bg-[var(--button-bg)]'} 
                         textColor={'text-[var(--button-text)]'} 
                         hoverBgColor={'bg-[var(--button-hover)]'} onClick={() =>{ setTab('Transaction'); navigate('/send') }} >
-                        Send
+                            Send
                     </Button>
                 </div>
             </div>

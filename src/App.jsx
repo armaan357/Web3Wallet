@@ -13,10 +13,11 @@ import { WalletImportPrivateKey } from './components/importWalletPrivateKey';
 import { ImportWalletPhrase } from './components/importWalletPhrase';
 import { ImportWalletPublicKey } from './components/importWalletPublicKey';
 import CryptoPurchase from './components/Purchase';
+import CryptoPrices from './components/realTimeFeed';
 
 function App() {
     const [ wallet, setWallet ] = useState(null);
-    const [ mnemonicSaved, setMnemonicSaved ] = useState(false);
+    const [ network, setNetwork ] = useState("");
     const [ tab, setTab ] = useState('Home');
     const [ walletMethod, setWalletMethod ] = useState('');
     function calculateSettingAsThemeString({ localStorageTheme, systemSettingDark }) {
@@ -37,17 +38,18 @@ function App() {
     return (
         <div id='backGround' className={`w-full ${currentThemeSetting == 'dark' ? "bg-custom-gradient-dark" : "bg-custom-gradient-light" } transition-colors duration-200 text-[var(--color-text)] min-h-dvh h-full`}>
             <div className='max-w-7xl mx-auto'>
-                <NavBar currentThemeSetting={currentThemeSetting} setCurrentThemeSetting={setCurrentThemeSetting} />
+                <NavBar currentThemeSetting={currentThemeSetting} tab={tab} setCurrentThemeSetting={setCurrentThemeSetting} />
                 <BrowserRouter>
                     <Routes>
+                        {/* <Route path='/' element={<CryptoPrices />} /> */}
                         <Route path='/' element={<HomePage setTab={ setTab } setWalletMethod={ setWalletMethod } />} />
-                        <Route path='/networks' element={<BlockchainNetworks setTab={ setTab } walletMethod={ walletMethod } />} />
+                        <Route path='/networks' element={<BlockchainNetworks setTab={ setTab } walletMethod={ walletMethod } setNetwork={setNetwork} />} />
                         <Route path='/import-wallet' element={<ImportMethods setTab={ setTab } />} />
                         <Route path='/import-wallet/private-key' element={<WalletImportPrivateKey onWalletCreate={ setWallet } />} />
                         <Route path='/import-wallet/secret-phrase' element={<ImportWalletPhrase />} />
                         <Route path='/import-wallet/public-key' element={<ImportWalletPublicKey />} /> 
                         <Route path='/create-wallet' element={<WalletCreator onWalletCreate={ setWallet } setTab={ setTab } />} />
-                        <Route path='/wallet-details' element={<WalletDetails wallet={ wallet } setTab={ setTab } />} />
+                        <Route path='/wallet-details' element={<WalletDetails wallet={ wallet } setTab={ setTab } network={network} />} />
                         <Route path='/purchase' element={<CryptoPurchase />} />
                         <Route path='/send' element={<Transaction wallet={ wallet } setTab={ setTab } />} />
                     </Routes>
